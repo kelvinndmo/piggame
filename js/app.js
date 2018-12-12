@@ -1,17 +1,7 @@
 
 var scores, activePlayer, roundScore;
 
-scores = [0, 0];
-activePlayer = 0;
-roundScore = 0;
-
-
-
-document.querySelector('.dice').style.display = 'none';
-document.querySelector('#score-0').textContent = '0';
-document.querySelector('#score-1').textContent = '0';
-document.querySelector('#current-0').textContent = '0';
-document.querySelector('#current-1').textContent = '0';
+init();
 
 document.querySelector('.btn-roll').addEventListener('click', function () {
     // 1. Get a randdom number
@@ -60,17 +50,37 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
 
 function nextPlayer() {
     activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
-        roundScore = 0;
-        document.getElementById('current-0').textContent = '0';
-        document.getElementById('current-0').textContent = '0';
+    roundScore = 0;
+    document.getElementById('current-0').textContent = '0';
+    document.getElementById('current-0').textContent = '0';
 
-        document.querySelector('.player-0-panel').classList.toggle('active');
-        document.querySelector('.player-1-panel').classList.toggle('active');
+    document.querySelector('.player-0-panel').classList.toggle('active');
+    document.querySelector('.player-1-panel').classList.toggle('active');
 
-        document.querySelector('.dice').style.display = 'none';
+    document.querySelector('.dice').style.display = 'none';
 
 }
 
+document.querySelector('.btn-new').addEventListener('click', init);
+
+function init() {
+
+    scores = [0, 0];
+    activePlayer = 0;
+    roundScore = 0;
+
+
+
+    document.querySelector('.dice').style.display = 'none';
+    document.querySelector('#score-0').textContent = '0';
+    document.querySelector('#score-1').textContent = '0';
+    document.querySelector('#current-0').textContent = '0';
+    document.querySelector('#current-1').textContent = '0';
+    document.querySelector('#name-0').textContent = 'Player 1';
+    document.querySelector('#name-1').textContent = 'Player 2';
+
+
+}
 
 
 
