@@ -4,8 +4,18 @@ var scores, activePlayer, roundScore;
 init();
 
 document.querySelector('.btn-roll').addEventListener('click', function () {
+
+    for (var i = 0; i < scores.length; i++){
+        if (scores[i] >= 100) {
+            document.querySelector('.player-'+scores[i]+'-panel').classList.remove('winner');
+            document.querySelector('.player-'+scores[i]+'-panel').classList.remove('active');
+    
+        }
+    }
+    
     // 1. Get a randdom number
 
+    
     var dice = Math.floor(Math.random() * 6) + 1;
 
     //2. Display the result
@@ -30,6 +40,8 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
 document.querySelector('.btn-hold').addEventListener('click', function () {
     //add current score to the global score
     scores[activePlayer] += roundScore;
+    document.getElementById('current-' + activePlayer).textContent = '0';
+
 
 
     //update the UI
@@ -41,10 +53,17 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
     if (scores[activePlayer] >= 100) {
         document.querySelector('#name-' + activePlayer).textContent = 'Winner';
         document.querySelector('.dice').style.display = 'none';
-        document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner')
+        document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
         document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+        document.querySelector('#score-0').textContent = '0';
+        document.querySelector('#score-1').textContent = '0';
+        document.querySelector('#current-0').textContent = '0';
+        document.querySelector('#current-1').textContent = '0';
+
+
 
     }
+    nextPlayer();
 
 })
 
@@ -52,7 +71,7 @@ function nextPlayer() {
     activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
     roundScore = 0;
     document.getElementById('current-0').textContent = '0';
-    document.getElementById('current-0').textContent = '0';
+    document.getElementById('current-1').textContent = '0';
 
     document.querySelector('.player-0-panel').classList.toggle('active');
     document.querySelector('.player-1-panel').classList.toggle('active');
@@ -78,6 +97,8 @@ function init() {
     document.querySelector('#current-1').textContent = '0';
     document.querySelector('#name-0').textContent = 'Player 1';
     document.querySelector('#name-1').textContent = 'Player 2';
+    document.querySelector('.player-0-panel').classList.remove('winner');
+    document.querySelector('.player-1-panel').classList.remove('winner');
 
 
 }
